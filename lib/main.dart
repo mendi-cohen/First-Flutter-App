@@ -3,84 +3,48 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'My First Flutter App'),
-    );
-  }
-}
+@override
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  void _decrementCounter() {
-    setState(() {
-      _counter--;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+Widget build(BuildContext context) {
+  return MaterialApp(
+    home: Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title:const Text('my-app name is Flutter!!!'), 
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'לחץ להנאתך',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+      body:const Center(child: Text('hello world!!')
+      ),
+      drawer: Drawer(
+        child: ListView(
+        children : [
+          ListTile(title: const Text('Item 1'), onTap: () {}),
+          ListTile(title: const Text('Item 2'), onTap: () {}),
+        ] ,
         ),
-      ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          FloatingActionButton(
-            onPressed: _decrementCounter,
-            tooltip: 'decrement',
-            child: const Icon(Icons.remove),
-          ),
-          SizedBox(width: 16),
-          FloatingActionButton(
-            onPressed: _incrementCounter,
-            tooltip: 'increment',
-            child: const Icon(Icons.add),
-          ),
+        ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const  [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'search',
+            ),
+
         ],
       ),
-    );
-  }
+
+floatingActionButton: FloatingActionButton(
+  onPressed: () {},
+   child: const Icon(Icons.add),
+  ), 
+
+   ),
+  );
+
+}
 }
