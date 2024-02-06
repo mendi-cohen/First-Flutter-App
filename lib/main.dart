@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'MyCountBox.dart';
 import './MyBuilderBox.dart';
@@ -134,19 +136,29 @@ class MyApp extends StatelessWidget {
                   mainAxisSpacing: 8.0,
                   crossAxisSpacing: 8.0,
                   padding: const EdgeInsets.all(8.0),
+                  scrollDirection: Axis.horizontal,
+                   reverse: true,
                   children: texsts.map((text) {
 
                     return Container(
                         color: Colors.blue,
-                        child: Card(
+                        child: GestureDetector(
+                          onTap: () => {
+                    // ignore: avoid_print
+                            print("Extent:$text")
+                          },
+                          child: Card(
                           child: Center(
                             child: Text(
                               text,
+                              
                               style: const TextStyle(
-                                  fontSize: 25.0, color: Colors.black,),
+                                  fontSize: 25.0,
+                                   color: Colors.black,
+                                   ),
                             ),
                           ),
-                        ));
+                        )));
                   }).toList(),
                 ))
           ])),
