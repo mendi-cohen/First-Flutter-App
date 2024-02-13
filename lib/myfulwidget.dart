@@ -30,11 +30,11 @@ class _MyFullWidgetState extends State<MyFullWidget> {
     return Center(
         child: Column(
          children: [
-      SizedBox(
-          child: Container(
+         Container(
             alignment: Alignment.center,
               width: 200,
               height:100,
+        
               color: Colors.amber,
               child: GridView.count(
                 crossAxisCount: 3,
@@ -48,7 +48,7 @@ class _MyFullWidgetState extends State<MyFullWidget> {
                      color: Colors.blue,
                       onPressed: Onpressed2, icon: const Icon(Icons.remove)),
                 ],
-              )))
+              ))
     ]));
   }
 }
