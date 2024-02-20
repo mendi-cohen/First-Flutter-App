@@ -1,84 +1,72 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("session-6"),
-        ),
-        body: DynamicWidget(),
-      ),
+      home: MyHome(),
+      
     );
   }
 }
 
-class DynamicWidget extends StatefulWidget {
+
+class MyHome extends StatelessWidget {
+  MyHome({super.key});
   @override
-  State<DynamicWidget> createState() => _DynamicW_State();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar( title: const Center( child: Text("session - 6"))),
+      body: Container(
+        height:600,
+          child: GridView.count(
+        crossAxisCount: 2,
+        scrollDirection: Axis.vertical,
+        children: [MyBox(BoxMargin:10, textValue: "hi you",), MyBox(BoxMargin:20,newText: "hohoy") 
+        , MyBox(BoxMargin: 40,newText: "hohoy"), MyBox(BoxMargin:50 ,newText: "hohoy"), 
+        MyBox(BoxMargin:60 ,newText: "hohoy"), MyBox(BoxMargin: 50,newText: "hohoy"), MyBox(BoxMargin:18 ,newText: "hohoy"), MyBox(BoxMargin: 15,newText: "hohoy")],
+      )),
+    );
+  }
 }
 
-class _DynamicW_State extends State<DynamicWidget> {
-  late MaterialColor _selectedColor;
-  final List<MaterialColor> _materialColors = [
-    Colors.red,
-    Colors.green,
-    Colors.yellow,
-    Colors.orange,
-  ];
-
+class MyBox extends StatefulWidget {
+  int BoxMargin;
+  String textValue;
+  String newText;
+  MyBox({super.key, this.BoxMargin = 20 , this.textValue = "" , this.newText = ''});
+  @override
+  State<MyBox> createState() => _MyBoxState();
+}
+class _MyBoxState extends State<MyBox> {
+  int _BoxMargin = 30;
+  String _textValue = '';
+  String newText = '';
   @override
   void initState() {
     super.initState();
-    _selectedColor = _materialColors[0];
+    _BoxMargin = widget.BoxMargin;
+    _textValue = widget.textValue;
   }
 
-  void _changeColor(MaterialColor color) {
+  void changeState() {
     setState(() {
-      _selectedColor = color;
+      _BoxMargin++;
+      _textValue = widget.newText;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        DropdownButton<MaterialColor>(
-          value: _selectedColor,
-          onChanged: (MaterialColor? color) {
-            if (color != null) {
-              _changeColor(color);
-            }
-          },
-          items: _materialColors.map<DropdownMenuItem<MaterialColor>>((MaterialColor color) {
-            return DropdownMenuItem<MaterialColor>(
-              value: color,
-              child: Container(
-                width: 100,
-                height: 20,
-                color: color,
-              ),
-            );
-          }).toList(),
-        ),
-        Expanded(
-          child: Container(
-            color: _selectedColor,
-            child: const Center(
-              child: Text(
-                "my selected color-770",
-                style: TextStyle(color: Colors.black),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-        )
-      ],
-    );
+    return Card(color: Colors.amber, child: GestureDetector(
+        onTap: () => changeState(),
+        child: Card(
+      margin: EdgeInsets.all(_BoxMargin.toDouble()),    
+      color: Colors.blue,
+      child:Card(child: Center(child:Text("$_textValue $_BoxMargin"))))));
   }
 }
